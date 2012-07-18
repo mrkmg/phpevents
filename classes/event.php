@@ -2,8 +2,29 @@
 
 trait EventTemplate
 {
-    private $_event_types = array();
-    private $_event_binds = array();
+    protected $_event_types = array();
+    protected $_event_binds = array();
+    
+    public function __construct()
+    {
+        if(isset($this->_event_default_types))
+        {
+            foreach($this->_event_default_types as $type)
+            {
+                $this->_event_set_type($type);
+            }
+        }
+        if(isset($this->_event_default_binds))
+        {
+            foreach($this->_event_default_binds as $event=>$methods)
+            {
+                foreach($methods as $method)
+                {
+                    $this->bind($event,function($event) use($method){$this->{$method}($event);});
+                }
+            }
+        }
+    }
     
     public function bind($type,$action)
     {
