@@ -46,7 +46,7 @@ This is a practical example of how these events could be used. This is a **very*
 
 [usingDefaultTypesAndBinds](https://github.com/mrkmg/phpevents/blob/master/tests/usingDefaultTypesAndBinds/index.php)
 
-This example outlines how to use the default types and default binds without using \__construct(). Caution here, for if you use \__construct(), _event_default_types and _event_default_binds will not be processed. This issue is being looked at for possible solutions
+This example outlines how to use the default types and default binds without using __construct()
 
 
 Future
