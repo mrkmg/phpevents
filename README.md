@@ -14,10 +14,10 @@ Using phpevents is quite simple.
 
 1. Include events.php
 2. Put "use EventTemplate;" in each class you wish to enable events on
-3. Define event types via one of the following
-    - Set Event Types via the property _event_default_types, which should be an arra of strings for each event type, currently this will only work if you do not define __construct for that class. I am looking to find a way around this.
+3. Define event types via one or both of the following
+    - Set Event Types via the property _event_default_types, which should be an arra of strings for each event type, ~~currently this will only work if you do not define __construct for that class. I am looking to find a way around this.~~
     - Somewhere in the class methods (usually __construct()), set the available event types with the private method _event_set_type()
-4. Bind functions to events via one of following
+4. Bind functions to events via one or both of following
     - Bind functions to the objects event via the public method bind(), can be used in the __construct() method.
     - If you used _event_default_types, you can use _event_default_binds. _event_default_binds automatically binds events to internal methods of the class. The structure of the property is array('event_name'=>array('method1','method2'))
 5. Use the public method fire() to fire an event, causing all bound functions to be ran.
@@ -57,4 +57,9 @@ Everything conceptual right now, and anything and everything could be changed.
 These are some planned features
 - Backtrace of event
 - Custom information for each event (for example on a user model, including which database was used to retreive the information)
+
+
+Fixed
+-----
+
 - Fix \__construct() issue where if using _event_default_type or _event_default_binds and \__construct() in a class, the defaults are not populated.

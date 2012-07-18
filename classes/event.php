@@ -4,29 +4,30 @@ trait EventTemplate
 {
     protected $_event_types = array();
     protected $_event_binds = array();
-    
-    public function __construct()
-    {
-        if(isset($this->_event_default_types))
-        {
-            foreach($this->_event_default_types as $type)
-            {
-                $this->_event_set_type($type);
-            }
-        }
-        if(isset($this->_event_default_binds))
-        {
-            foreach($this->_event_default_binds as $event=>$methods)
-            {
-                foreach($methods as $method)
-                {
-                    $this->bind($event,function($event) use($method){$this->{$method}($event);});
-                }
-            }
-        }
-    }
+    protected $_event_defaults_processed = false;
     
     public function bind($type,$action)
+    {
+        $this->_event_check_defaults();
+        return $this->_event_bind($type,$action);
+    }
+    
+    public function unbind($type,$action)
+    {
+        $this->_event_check_defaults();
+        if(!in_array($action,$this->_event_binds[$type]))
+            return false;
+        unset($this->_event_binds[$type][array_search($action,$this->_events_binds)]);
+        return true;
+    }
+    
+    public function fire($type)
+    {
+        $this->_event_check_defaults();
+        $this->_event_fire($type);
+    }
+    
+    private function _event_bind($type,$action)
     {
         if(!in_array($type,$this->_event_types))
         {
@@ -37,17 +38,9 @@ trait EventTemplate
         return true;
     }
     
-    public function unbind($type,$action)
+    private function _event_check_defaults()
     {
-        if(!in_array($action,$this->_event_binds[$type]))
-            return false;
-        unset($this->_event_binds[$type][array_search($action,$this->_events_binds)]);
-        return true;
-    }
-    
-    public function fire($type)
-    {
-        $this->_event_fire($type);
+        if(!$this->_event_defaults_processed) $this->_event_process_defaults();
     }
     
     private function _event_set_type($type)
@@ -75,6 +68,30 @@ trait EventTemplate
     private function _event_fire_closure($closure,&$event)
     {
         $closure($event);
+    }
+    
+    
+    
+    private function _event_process_defaults()
+    {
+        if(isset($this->_event_default_types))
+        {
+            foreach($this->_event_default_types as $type)
+            {
+                $this->_event_set_type($type);
+            }
+        }
+        if(isset($this->_event_default_binds))
+        {
+            foreach($this->_event_default_binds as $event=>$methods)
+            {
+                foreach($methods as $method)
+                {
+                    $this->_event_bind($event,function($event) use($method){$this->{$method}($event);});
+                }
+            }
+        }
+        $this->_event_defaults_processed = true;
     }
 }
 
