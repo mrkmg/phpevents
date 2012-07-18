@@ -24,19 +24,19 @@ Examples
 
 There are currently 4 examples/tests. They are are in the tests folder. Here is a simple breakdown of what each on is.
 
-*defineInConstruct*
+[defineInConstruct](https://github.com/mrkmg/phpevents/blob/master/tests/defineInConstruct/index.php)
 
 This example/test shows how to define the event types and bind internal methods of that class to those events.
 
-*simple*
+[simple](https://github.com/mrkmg/phpevents/blob/master/tests/simple/index.php)
 
 This example/test shows how to bind both a global function and an anonymous function to an objects events.
 
-*useOtherPrivate*
+[useOtherPrivate](https://github.com/mrkmg/phpevents/blob/master/tests/useOtherPrivate/index.php)
 
 This example/test shows how to bind one objects events to another objects private methods
 
-*logging*
+[logging](https://github.com/mrkmg/phpevents/blob/master/tests/logging/index.php)
 
 This is a practical example of how these events could be used. This is a **very** simple example of how logging could be tied to a model object. 
 
