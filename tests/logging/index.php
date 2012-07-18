@@ -64,9 +64,7 @@ class Person {
         //Fire delete_data event
         $this->fire('delete_data');
     }
-    
-    
-    
+
 }
 
 function logEv($event)
