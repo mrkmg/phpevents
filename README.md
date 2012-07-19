@@ -48,6 +48,10 @@ This is a practical example of how these events could be used. This is a **very*
 
 This example outlines how to use the default types and default binds without using __construct()
 
+[combineConstructDefaults](https://github.com/mrkmg/phpevents/blob/master/tests/combineConstructDefaults/index.php)
+
+This example outlines how to use the default types and default binds and __construct()
+
 
 Future
 ------
