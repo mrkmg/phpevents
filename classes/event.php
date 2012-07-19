@@ -105,6 +105,9 @@ class Event
     public $microtime;
     public $backtrace;
     
+    const PRINT_HTML = 0;
+    const PRINT_CMD = 1;
+    
     public function __construct($type,&$object)
     {
         $this->type = $type;
@@ -121,9 +124,19 @@ class Event
      * Bill Getas
      * http://www.php.net/manual/en/function.debug-backtrace.php#101498
     */
-    public function print_backtrace()
+    public function print_backtrace($type = self::PRINT_HTML)
     {
-       array_walk( $this->backtrace, create_function( '$a,$b', 'print "<br /><b>". basename( $a[\'file\'] ). "</b> &nbsp; <font color=\"red\">{$a[\'line\']}</font> &nbsp; <font color=\"green\">{$a[\'function\']} ()</font> &nbsp; -- ". dirname( $a[\'file\'] ). "/";' ) ); 
+        switch($type)
+        {
+        case 0:
+            array_walk( $this->backtrace,function($a,$b) {print "<br /><b>". basename( $a['file'] ). "</b> &nbsp; <font color=\"red\">{$a['line']}</font> &nbsp; <font color=\"green\">{$a['function']}()</font> &nbsp; -- ". dirname( $a['file'] ). "/";}); 
+            break;
+        case 1:
+            array_walk( $this->backtrace,function($a,$b) {print "\n".basename( $a['file'] )."\t{$a['line']}\t{$a['function']}()\t".dirname( $a['file'] ). "/";}); 
+            break;
+        default:
+            throw new Exception('Could not understand type.');
+        }
     }
 }
 

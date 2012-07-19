@@ -70,8 +70,8 @@ class Person {
 function logEv($event)
 {
     echo 'Event: '.$event->type.' for user: '.$event->object->username;
-    $event->print_backtrace();
-    echo '<br /><br />';
+    $event->print_backtrace(Event::PRINT_HTML);
+    echo "<br /><br />\n";
     
 }
 
