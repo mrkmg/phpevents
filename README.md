@@ -5,7 +5,10 @@ phpevents
 Concept
 -------
 
-Each class that you wish to enable events on "uses" the EventTemplate trait. That trait includes all the methods needed to set event types, bind functions the events, and fire those events. A class defines its own events. When an event is fired, the function(s) tied to that event are ran and passed an Event Object. The Event Object contains 3 public properties: $type (Name of the type of event), $object (the object that the event was fired on), $microtime (A float representation of the microtime the event occured)
+Each class that you wish to enable events on "uses" the EventTemplate trait. That trait includes all the methods needed to set event types, bind functions the events, and fire those events.
+A class defines its own events. When an event is fired, the function(s) tied to that event are ran and passed an Event Object. The Event Object contains 3 public properties: $type (Name of
+the type of event), $object (the object that the event was fired on), $microtime (A float representation of the microtime the event occured), $backtrace (A snapshop of the backtrace that
+caused that event to be fired). The Event Object also has one method, print_backtrace() which prints an html version of the backtrace which is very easy to understand
 
 Usage
 -----
@@ -42,7 +45,7 @@ This example/test shows how to bind one objects events to another objects privat
 
 [logging](https://github.com/mrkmg/phpevents/blob/master/tests/logging/index.php)
 
-This is a practical example of how these events could be used. This is a **very** simple example of how logging could be tied to a model object. 
+This is a practical example of how these events could be used. This is a **very** simple example of how logging could be tied to a model object. Has been updated to make use of backtrace.
 
 [usingDefaultTypesAndBinds](https://github.com/mrkmg/phpevents/blob/master/tests/usingDefaultTypesAndBinds/index.php)
 

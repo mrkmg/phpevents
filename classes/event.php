@@ -103,12 +103,27 @@ class Event
     public $type;
     public $object;
     public $microtime;
+    public $backtrace;
     
     public function __construct($type,&$object)
     {
         $this->type = $type;
         $this->object = &$object;
         $this->microtime = microtime(true);
+        
+        $backtrace = debug_backtrace();
+        array_shift($backtrace);
+        array_shift($backtrace);
+        $this->backtrace = $backtrace;
+    }
+    
+    /**
+     * Bill Getas
+     * http://www.php.net/manual/en/function.debug-backtrace.php#101498
+    */
+    public function print_backtrace()
+    {
+       array_walk( $this->backtrace, create_function( '$a,$b', 'print "<br /><b>". basename( $a[\'file\'] ). "</b> &nbsp; <font color=\"red\">{$a[\'line\']}</font> &nbsp; <font color=\"green\">{$a[\'function\']} ()</font> &nbsp; -- ". dirname( $a[\'file\'] ). "/";' ) ); 
     }
 }
 
