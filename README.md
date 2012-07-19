@@ -59,6 +59,7 @@ Future
 Everything conceptual right now, and anything and everything could be changed.
 
 These are some planned features
+- Extendable Event model
 - Backtrace of event
 - Custom information for each event (for example on a user model, including which database was used to retreive the information)
 
