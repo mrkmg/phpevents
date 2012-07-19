@@ -6,15 +6,18 @@ Include event.php
 
 This should be self explanatory
 
+```php
     <?php
     include('event.php');
     ?>
+```
 
 Enable events on a class
 ------------------------
 
 To add enable events on any class, use the EventTemplate trait.
 
+```php
     <?php
     include('event.php');
     
@@ -26,12 +29,14 @@ To add enable events on any class, use the EventTemplate trait.
     }
     
     ?>
-    
+```
+
 Set Default Event Types for a Class
 -------------------------------------
 
 To set the default event types for a class, set the $_event_default_types property.
 
+```php
     <?php
     include('event.php');
     
@@ -49,12 +54,14 @@ To set the default event types for a class, set the $_event_default_types proper
     }
     
     ?>
-    
+```
+
 Set Default Internal Binds for a Class
 -----------------------------
 
 To set the default event binds for a class, set the $_event_default_binds property. Binds set via this way can only trigger methods of this class.
 
+```php
     <?php
     include('event.php');
 
@@ -96,12 +103,14 @@ To set the default event binds for a class, set the $_event_default_binds proper
     }
     
     ?>
+```
 
 Fire an event!
 --------------
 
 To fire an event, call the fire() method of a class.
 
+```php
     <?php
     include('event.php');
     
@@ -149,7 +158,7 @@ To fire an event, call the fire() method of a class.
     }
     
     ?>
-    
+```    
 
 Do More!
 --------
