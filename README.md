@@ -15,8 +15,8 @@ Using phpevents is quite simple.
 1. Include events.php
 2. Put "use EventTemplate;" in each class you wish to enable events on
 3. Define event types via one or both of the following
-    - Set Event Types via the property _event_default_types, which should be an arra of strings for each event type, ~~currently this will only work if you do not define __construct for that class. I am looking to find a way around this.~~
-    - Somewhere in the class methods (usually __construct()), set the available event types with the private method _event_set_type()
+    - Set Event Types via the property _event_default_types, which should be an array of strings for each event type. You can set the class type as well, see the "extendedEventClass" Example
+    - Somewhere in the class methods (usually __construct()), set the available event types with the private method _event_set_type(). The same as above, see the "extendedEventClass" Example
 4. Bind functions to events via one or both of following
     - Bind functions to the objects event via the public method bind(), can be used in the __construct() method.
     - If you used _event_default_types, you can use _event_default_binds. _event_default_binds automatically binds events to internal methods of the class. The structure of the property is array('event_name'=>array('method1','method2'))
@@ -52,6 +52,10 @@ This example outlines how to use the default types and default binds without usi
 
 This example outlines how to use the default types and default binds and __construct()
 
+[extendedEventClass](https://github.com/mrkmg/phpevents/blob/master/tests/extendedEventClass/index.php)
+
+This example shows how to define your own event class and set it to be used for an event type.
+
 
 Future
 ------
@@ -59,9 +63,8 @@ Future
 Everything conceptual right now, and anything and everything could be changed.
 
 These are some planned features
-- Extendable Event model
 - Backtrace of event
-- Custom information for each event (for example on a user model, including which database was used to retreive the information)
+- ~~Custom information for each event (for example on a user model, including which database was used to retreive the information)~~ This can be down via extending the Event Class
 
 
 Fixed

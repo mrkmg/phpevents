@@ -15,7 +15,7 @@ trait EventTemplate
     public function unbind($type,$action)
     {
         $this->_event_check_defaults();
-        if(!in_array($action,$this->_event_binds[$type]))
+        if(!key_exists($action,$this->_event_binds))
             return false;
         unset($this->_event_binds[$type][array_search($action,$this->_events_binds)]);
         return true;
@@ -29,7 +29,7 @@ trait EventTemplate
     
     private function _event_bind($type,$action)
     {
-        if(!in_array($type,$this->_event_types))
+        if(!key_exists($type,$this->_event_types))
         {
             throw new Exception('Type not defined');
         }
@@ -43,14 +43,14 @@ trait EventTemplate
         if(!$this->_event_defaults_processed) $this->_event_process_defaults();
     }
     
-    private function _event_set_type($type)
+    private function _event_set_type($type,$class="Event")
     {
-        $this->_event_types[] = $type;
+        $this->_event_types[$type] = $class;
     }
     
     private function _event_fire($type)
     {
-        $event = new Event($type,$this);
+        $event = new $this->_event_types[$type]($type,$this);
         foreach($this->_event_binds[$type] as $bind)
         {
             if(is_callable($bind))
@@ -70,15 +70,18 @@ trait EventTemplate
         $closure($event);
     }
     
-    
-    
     private function _event_process_defaults()
     {
         if(isset($this->_event_default_types))
         {
-            foreach($this->_event_default_types as $type)
+            foreach($this->_event_default_types as $type=>$class)
             {
-                $this->_event_set_type($type);
+                if(is_int($type))
+                {
+                    $type = $class;
+                    $class = "Event";
+                }
+                $this->_event_set_type($type,$class);
             }
         }
         if(isset($this->_event_default_binds))
