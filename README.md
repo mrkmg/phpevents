@@ -66,11 +66,11 @@ Future
 Everything conceptual right now, and anything and everything could be changed.
 
 These are some planned features
-- Backtrace of event
-- ~~Custom information for each event (for example on a user model, including which database was used to retreive the information)~~ This can be down via extending the Event Class
+- ~~Backtrace of event~~ Implemented
+- ~~Custom information for each event (for example on a user model, including which database was used to retreive the information)~~ This can be done via extending the Event Class
 
 
 Fixed
 -----
 
-- Fix \__construct() issue where if using _event_default_type or _event_default_binds and \__construct() in a class, the defaults are not populated.
+- Fix _ _construct() issue where if using _event_default_type or _event_default_binds and _ _construct() in a class, the defaults are not populated.
